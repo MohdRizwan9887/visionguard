@@ -4,6 +4,8 @@ A production-style video analytics pipeline that turns camera frames into **safe
 
 ## Pipeline
 
+![VisionGuard pipeline](assets/visionguard_pipeline.png)
+
 ```
 frame -> YOLOv8-pose (ONNX) -> person boxes + 17 keypoints
       -> SORT tracker (Kalman + Hungarian), keypoints carried per track
@@ -53,6 +55,10 @@ Reference run: 2-vCPU cloud CPU, 640x640, YOLOv8n ONNX FP32, 130-frame synthetic
 | Pipeline FPS with pose + segmentation | 4.4 |
 
 On the synthetic fall clip, the fall event was raised at t = 3.64 s against a true onset of 3.0 s (within the 2 s tolerance). This clip only verifies the pipeline end to end. It is not real fall footage, and no accuracy claim is made. Evaluate on real labeled video with `evaluate.py` before drawing conclusions.
+
+![Torso angle and box aspect ratio over time, with the fall event marked](assets/visionguard_fall_timeline.png)
+
+Once the person is lying down the hip keypoints are no longer visible, so the engine falls back to the bounding-box aspect ratio (orange line) to keep confirming the fall.
 
 ## Limitations and next steps
 

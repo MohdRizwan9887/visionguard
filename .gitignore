@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+models/*.onnx
+models/*.pt
+data/
+*.mp4
+events.jsonl
+.pytest_cache/
